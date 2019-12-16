@@ -102,3 +102,37 @@
       })
       .fail();
     })
+
+    $(document).on('blur', "#name-filter", function (){
+      $('#user-list tr:not(:first)' ).remove();
+      el = $(this);
+      name = $(el).val();
+      $.ajax({
+        url : "../../apis/user/read-by-name.php?name="+name,
+        method : "GET",
+        contentType: false,
+        cache: false,
+        processData: false,
+      })
+      .done(function(data){
+        users = data.data;
+        users.forEach(user => {
+          $('#user-list').append(`
+              <tr id=U-${user.nUserID} >
+                <th>${user.nUserID}</th>
+                <td>${user.cName}</td>
+                <td>${user.cSurname}</td>
+                <td>${user.cEmail}</td>
+                <td>${user.cEncriptedPassword}</td>
+                <td>${user.cAddress}</td>
+                <td>${user.dSignUpDate}</td>
+                <td>${user.nTotalAmountSpent}</td>
+                <td><button id='deleteUser' class="button" value="id=U-${user.nUserID}"> Delete </button></td>
+                <td><button id='updateUser' class="button" value="id=U-${user.nUserID}"> Update </button></td>
+              </tr>
+            `);
+        });
+      })
+      .fail();
+  
+    })

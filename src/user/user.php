@@ -14,6 +14,7 @@
 <body>
 
 <h1>Users</h1>
+Search <input type="text" name="name-filter" id="name-filter">
 	<div>
 		<table id='user-list'>
 			<tr>
