@@ -70,10 +70,6 @@ Search <input type="text" name="name-filter" id="name-filter">
 			<input id='newUserAddress' name='newUserAddress' type="text" class="input" required>
 		</div>
 		<div class="group">
-			<label class="label">SignUpDate</label>
-			<input id='newSignUpDate' name='newSignUpDate' type="text" class="input" required>
-		</div>
-		<div class="group">
 			<label class="label">TotalAmountSpent</label>
 			<input id='newTotalAmountSpent' name='newTotalAmountSpent' type="text" class="input" required>
 		</div>

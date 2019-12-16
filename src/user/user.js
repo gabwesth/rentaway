@@ -1,6 +1,11 @@
     // ****************************************** create user ****************************************** 
     $(document).on('click', '#createUser', function (){
         var form_data = new FormData();
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var today = yyyy + '-' + mm + '-' + dd;
 
         el = $(this);
   
@@ -9,7 +14,7 @@
         form_data.append("cEmail", $("#newEmail").val());
         form_data.append("cEncriptedPassword", $("#newEncriptedPassword").val());
         form_data.append("cAddress", $("#newUserAddress").val());
-        form_data.append("dSignUpDate", $("#newSignUpDate").val());
+        form_data.append("dSignUpDate", today);
         form_data.append("nTotalAmountSpent",  $("#newTotalAmountSpent").val());
     
         console.log(JSON.stringify(Object.fromEntries(form_data)))
@@ -71,7 +76,6 @@
     $("#newEmail").val($("#U-"+id).children()[3].innerText);
     $("#newEncriptedPassword").val($("#U-"+id).children()[4].innerText);
     $("#newUserAddress").val($("#U-"+id).children()[5].innerText);
-    $("#newSignUpDate").val($("#U-"+id).children()[6].innerText);
     $("#newTotalAmountSpent").val($("#U-"+id).children()[7].innerText);
     $("#confirmUserUpdate").val($("#U-"+id).children()[0].innerText);
 
@@ -82,13 +86,13 @@
       var form_data = new FormData();
       el = $(this);
       id = $(el).val();
-      form_data.append("nUserID", id);
       form_data.append("cName", $("#newUserName").val());
       form_data.append("cSurname", $("#newSurname").val());
       form_data.append("cEmail", $("#newEmail").val());
       form_data.append("cEncriptedPassword", $("#newEncriptedPassword").val());
       form_data.append("cAddress", $("#newUserAddress").val());
       form_data.append("nTotalAmountSpent", $("#newTotalAmountSpent").val());
+      form_data.append("nUserID", id);
 
       $.ajax({
         url : "../../apis/user/update.php",
@@ -127,8 +131,8 @@
                 <td>${user.cAddress}</td>
                 <td>${user.dSignUpDate}</td>
                 <td>${user.nTotalAmountSpent}</td>
-                <td><button id='deleteUser' class="button" value="id=U-${user.nUserID}"> Delete </button></td>
-                <td><button id='updateUser' class="button" value="id=U-${user.nUserID}"> Update </button></td>
+                <td><button id='deleteUser' class="button" value="${user.nUserID}"> Delete </button></td>
+                <td><button id='updateUser' class="button" value="${user.nUserID}"> Update </button></td>
               </tr>
             `);
         });

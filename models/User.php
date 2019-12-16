@@ -42,15 +42,14 @@ class User{
 	}
 
 	public function create(){
-		$query = "INSERT INTO $this->table
-		 SET 
-			cName = :cName,
-			cSurname = :cSurname,
-			cEmail = :cEmail,
-			cEncriptedPassword = :cEncriptedPassword,
-			cAddress = :cAddress,
-			dSignUpDate = :dSignUpDate,
-			nTotalAmountSpent = :nTotalAmountSpent";
+		$query = "call sp_create_user(
+			:cName,
+			:cSurname,
+			:cEmail,
+			:cEncriptedPassword,
+			:cAddress,
+			:dSignUpDate,
+			:nTotalAmountSpent)";
 		$stmt = $this->conn->prepare($query);
 
 		$stmt->bindParam(':cName', $this->cName);
@@ -69,16 +68,14 @@ class User{
 	}
 
 	public function update(){
-		$query = "UPDATE $this->table
-		 SET 
-			cName = :cName,
-			cSurname = :cSurname,
-			cEmail = :cEmail,
-			cEncriptedPassword = :cEncriptedPassword,
-			cAddress = :cAddress,
-			nTotalAmountSpent = :nTotalAmountSpent
-		WHERE
-			nUserID = :nUserID";
+		$query = "call sp_update_user(
+			:cName,
+			:cSurname,
+			:cEmail,
+			:cEncriptedPassword,
+			:cAddress,
+			:nTotalAmountSpent,
+			:nUserID)";
 		$stmt = $this->conn->prepare($query);
 
 		$stmt->bindParam(':cName', $this->cName);
