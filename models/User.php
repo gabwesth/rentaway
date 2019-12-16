@@ -33,6 +33,14 @@ class User{
 		return $stmt;
 	}
 
+	public function read_by_name($name){
+		$query = "SELECT * FROM $this->table
+				WHERE cName LIKE '%$name%' OR cSurname LIKE '%$name%'"; 
+		$stmt = $this->conn->prepare($query); 
+		$stmt->execute(); 
+		return $stmt;
+	}
+
 	public function create(){
 		$query = "INSERT INTO $this->table
 		 SET 
