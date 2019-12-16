@@ -11,6 +11,7 @@ $(document).ready(function (){
   $('#from').val(today.toISOString().slice(0, 10));
   $('#to').val(tomorrow.toISOString().slice(0, 10));
   filterSearch();
+  getCities();
 })
 
 
@@ -64,9 +65,12 @@ function filterSearch() {
 
   var from = $("#from").val();
   var to = $("#to").val();
+  var city = $("#where-filter").val();
+
+  if(city === null){city = 'everywhere'}
 
     $.ajax({
-      url : "../../apis/house/read-by-availability.php?in="+from+"&out="+to,
+      url : "../../apis/house/read-by-availability.php?in="+from+"&out="+to+"&city="+city,
       method : "GET",
       contentType: false,
       cache: false,
@@ -172,6 +176,7 @@ $('#creditCard').change(function() {
 
 
 function updateCreditcards(){
+  $('#creditCard').empty();
   $.ajax({
     url : "../../apis/creditcard/read-by-user-id.php?id="+nUserID,
     method : "GET",
@@ -182,11 +187,34 @@ function updateCreditcards(){
   .done(function(data){
     var creditcards = data.data;
     creditcards.forEach(creditcard => {
-    $('#creditCard').empty().append(`
+    $('#creditCard').append(`
       <option value="${creditcard.cCardNumber}">${creditcard.cCardNumber}</option
     `);
     });
   })
   .fail(function(e){
   });
+}
+
+function getCities(){
+  $.ajax({
+    url : "../../apis/house/read-cities.php",
+    method : "GET",
+    contentType: false,
+    cache: false,
+    processData: false,
+  })
+  .done(function(data){
+    var cities = data.data;
+    cities.forEach(city => {
+    $('#where-filter').append(`
+      <option value="${city}">${city}</option
+    `);
+    });
+  })
+  .fail(function(e){
+  });
+  $('#where-filter').append(`
+      <option value="everywhere">everywhere</option
+    `);
 }

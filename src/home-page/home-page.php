@@ -25,8 +25,11 @@
 <div id="user" data-value='<?=$userID?>'><?=$user['cName'].' '.$user['cSurname']?></div>
 <h1>houses</h1>
 <div class="filter-date">
-	From <input id='from' type="date" value="2019-12-08">
-	To <input id='to' type="date" value="2019-12-09">
+	From <input id='from' type="date" value="">
+	To <input id='to' type="date" value="">
+	Where
+	<select id="where-filter" value="everywhere">
+	</select>
 	<button id='search'>search</button>
 </div>
 <br>

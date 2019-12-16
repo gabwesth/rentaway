@@ -103,7 +103,12 @@ class House{
 		return false;
 	}
 
-	public function read_by_availability($in, $out){
+	public function read_by_availability($in, $out, $city){
+
+		$end_query = ';';
+		if($city !== 'everywhere'){
+			$end_query = ' AND cCity = '.$city.';';
+		}
 
 		$query = "SELECT nHouseID, cName, cDescription, nSqm, nCapacity, cCity, cAddress, nPricePerDay
 		FROM House
@@ -114,8 +119,15 @@ class House{
 		AND nHouseID NOT IN (
 		SELECT nHouseID FROM Availability
 		WHERE dFromDate BETWEEN '$in' AND '$out'
-		OR dToDate BETWEEN '$in' AND '$out')";
+		OR dToDate BETWEEN '$in' AND '$out') $end_query";
 		$stmt = $this->conn->prepare($query);
+		$stmt->execute(); 
+		return $stmt;
+	}
+
+	public function read_cities(){
+		$query = "SELECT DISTINCT `cCity` FROM $this->table"; 
+		$stmt = $this->conn->prepare($query); 
 		$stmt->execute(); 
 		return $stmt;
 	}

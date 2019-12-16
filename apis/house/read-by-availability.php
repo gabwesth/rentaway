@@ -14,8 +14,9 @@
 
 	$in = isset($_GET['in']) ? $_GET['in'] : die();
 	$out = isset($_GET['out']) ? $_GET['out'] : die();
+	$city = isset($_GET['city']) ? $_GET['city'] : die();
 
-	$result = $house->read_by_availability($in, $out);
+	$result = $house->read_by_availability($in, $out, $city);
 
 	$num = $result->rowCount();
 
