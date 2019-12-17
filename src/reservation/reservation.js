@@ -3,10 +3,11 @@
         var form_data = new FormData();
 
         el = $(this);
+        var today = new Date();
   
         form_data.append("nHouseID", $("#newHouseID").val());
         form_data.append("nUserID", $("#newUserID").val());
-        form_data.append("dCreationDate", $("#newCreationDate").val());
+        form_data.append("dCreationDate", today);
         form_data.append("dChekin", $("#newCheckin").val());
         form_data.append("dChekout", $("#newCheckout").val());
         form_data.append("nTotalPrice", $("#newTotalPrice").val());
@@ -26,7 +27,7 @@
               <tr id=R-${reservation.nreservationID} >
                 <td>${reservation.nHouseID}</td>
                 <td>${reservation.nUserID}</td>
-                <td>${reservation.dCreationDate}</td>
+                <td>${today}</td>
                 <td>${reservation.dChekin}</td>
                 <td>${reservation.dChekout}</td>
                 <td>${reservation.nTotalPrice}</td>

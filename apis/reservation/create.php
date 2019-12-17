@@ -35,7 +35,7 @@
 
 	$credicard->nCreditcardID = $_POST['nCreditcardID']; 
 
-	$availability->nHouseID = $_POST['nUserID'];
+	$availability->nHouseID = $_POST['nHouseID'];
 	$availability->dFromDate = $_POST['dChekin'];
 	$availability->dToDate = $_POST['dChekout'];
 

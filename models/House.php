@@ -107,7 +107,7 @@ class House{
 
 		$end_query = ';';
 		if($city !== 'everywhere'){
-			$end_query = ' AND cCity = '.$city.';';
+			$end_query = ' AND cCity = "'.$city.'";';
 		}
 
 		$query = "SELECT nHouseID, cName, cDescription, nSqm, nCapacity, cCity, cAddress, nPricePerDay

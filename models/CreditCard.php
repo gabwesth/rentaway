@@ -40,7 +40,7 @@ class CreditCard{
 			:nExpMonth,
 			:nExpYear,
 			:nSecurityCode,
-			:totalAmountSpent,
+			0,
 			:nUserID
 		)";
 		$stmt = $this->conn->prepare($query);
@@ -50,7 +50,6 @@ class CreditCard{
 		$stmt->bindParam(':nExpMonth', $this->nExpMonth);
 		$stmt->bindParam(':nExpYear', $this->nExpYear);
 		$stmt->bindParam(':nSecurityCode', $this->nSecurityCode);
-		$stmt->bindParam(':totalAmountSpent', $this->nTotalAmountSpent);
 		$stmt->bindParam(':nUserID', $this->nUserID);
 
 		if($stmt->execute()){
@@ -106,6 +105,7 @@ class CreditCard{
 	// }
 
 	public function update_totalAmountSpent($nTotalPrice){
+		echo $nTotalPrice;
 		$query = "CALL sp_update_totalAmountSpent_creditCard(:nTotalPrice, :nCreditcardID);";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':nTotalPrice', $nTotalPrice);

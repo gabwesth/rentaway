@@ -1,7 +1,8 @@
 //Global variables
 var nUserID = $("#user").data().value;
-
-
+var nHouseID = '';
+var nTotalPrice = '';
+var nCreditcardID = '';
 
 // ****************************************** search availability ****************************************** 
 $(document).ready(function (){
@@ -19,43 +20,6 @@ $(document).on('click', '#search', function (){
   filterSearch();
 })
 
-var ID = 0;
-
-// ****************************************** create reservation ****************************************** 
-$(document).on('click', '#confirBooking', function (){
-  var form_data = new FormData();
-
-  el = $(this);
-  var dCreationDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-  var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-  var firstDate = Date.parse($("#from").val());
-  var secondDate = Date.parse($("#to").val());
-  var dayCount = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-  var pricePerDay = $(this).parent().siblings('#price')[0].innerText;
-  var nTotalPrice = pricePerDay * dayCount;
-  var nCreditcardID = 1; // MAKE THEM CHOOSE
-  
-  form_data.append("nHouseID", $("#bookHouse").val());
-  form_data.append("nUserID", nUserID);
-  form_data.append("dCreationDate", dCreationDate);
-  form_data.append("dChekin", $("#from").val());
-  form_data.append("dChekout", $("#to").val());
-  form_data.append("nTotalPrice", nTotalPrice);
-  form_data.append("nCreditcardID", nCreditcardID);
-
-    $.ajax({
-      url : "../../apis/reservation/create.php",
-      method : "POST",
-      data: form_data,
-      contentType: false,
-      cache: false,
-      processData: false,
-    })
-    .done(function(data){
-    })
-    .fail();
-
-})
 
 function filterSearch() {
   $('#house-list').css('display', 'none');   
@@ -97,10 +61,43 @@ function filterSearch() {
     .fail();
 }
 
+$(document).on('click', '#confirmBooking', function (){
+  var form_data = new FormData();
+
+  var dCreationDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  
+  form_data.append("nHouseID", nHouseID);
+  form_data.append("nUserID", nUserID);
+  form_data.append("dCreationDate", dCreationDate);
+  form_data.append("dChekin", $("#from").val());
+  form_data.append("dChekout", $("#to").val());
+  form_data.append("nTotalPrice", nTotalPrice);
+  form_data.append("nCreditcardID", nCreditcardID);
+
+  console.log( JSON.stringify(Object.fromEntries(form_data)) );
+
+    $.ajax({
+      url : "../../apis/reservation/create.php",
+      method : "POST",
+      data: form_data,
+      contentType: false,
+      cache: false,
+      processData: false,
+    })
+    .done(function(){
+      $("#confirmation-modal").css("display","none");
+      filterSearch();
+    })
+    .fail();
+
+})
+
 
 
 $(document).on('click', '#bookHouse', function() {
   el = $(this);
+  nHouseID = el.val();
+  
   // var dCreationDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
   var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
   var firstDate = $("#from").val();
@@ -116,6 +113,8 @@ $(document).on('click', '#bookHouse', function() {
   var price = $(this).parent().siblings('#price')[0].innerText;
   
   var totalPrice = price * dayCount;
+
+  nTotalPrice = totalPrice;
 
   $('#confirm-house').append(`
         <tr>
@@ -157,6 +156,7 @@ $('#creditCard').change(function() {
     $('#addNewCard').show();
     }
   else{
+    nCreditcardID = selectedCreditCard;
     $('#addNewCard').hide();
   }
   });
@@ -185,10 +185,13 @@ function updateCreditcards(){
     processData: false,
   })
   .done(function(data){
+    $('#creditCard').append(`
+      <option value="new">new</option
+    `);
     var creditcards = data.data;
     creditcards.forEach(creditcard => {
     $('#creditCard').append(`
-      <option value="${creditcard.cCardNumber}">${creditcard.cCardNumber}</option
+      <option value="${creditcard.nCreditcardID}">${creditcard.cCardNumber}</option
     `);
     });
   })
