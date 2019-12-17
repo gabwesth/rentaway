@@ -2,7 +2,7 @@
 	include_once '../../apis/house/read-all.php';
 	session_start();
 	if(!$_SESSION){
-		echo "<a href='http://localhost:8888/rentaway/src/log-in/login.php'><label class='label'>LOG IN</label></a>";
+		header('Location: ../../src/log-in/login.php');
 	}
 	else{
 		$user = $_SESSION['jUser'];

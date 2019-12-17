@@ -22,7 +22,6 @@
 	$user->cEncriptedPassword = $_POST['cEncriptedPassword'];
 	$user->cAddress = $_POST['cAddress'];
 	$user->dSignUpDate = $_POST['dSignUpDate'];
-	$user->nTotalAmountSpent = $_POST['nTotalAmountSpent'];
 
 	if($user->create()){
 		echo json_encode($user);

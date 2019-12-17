@@ -14,12 +14,10 @@
         form_data.append("cEmail", $("#newEmail").val());
         form_data.append("cEncriptedPassword", $("#newEncriptedPassword").val());
         form_data.append("cAddress", $("#newUserAddress").val());
-        form_data.append("dSignUpDate", today);
-        form_data.append("nTotalAmountSpent",  $("#newTotalAmountSpent").val());
     
         console.log(JSON.stringify(Object.fromEntries(form_data)))
           $.ajax({
-            url : "../../apis/user/create.php",
+            url : "../../apis/api-sign-up.php",
             method : "POST",
             data: form_data,
             contentType: false,
@@ -36,8 +34,7 @@
                 <td>${user.cEmail}</td>
                 <td>${user.cEncriptedPassword}</td>
                 <td>${user.cAddress}</td>
-                <td>${user.dSignUpDate}</td>
-                <td>${user.nTotalAmountSpent}</td>
+                <td>${today}</td>
                 <td><button id='deleteUser' class="button" value=""> Delete </button></td>
                 <td><button id='updateUser' class="button" value=""> Update </button></td>
               </tr>

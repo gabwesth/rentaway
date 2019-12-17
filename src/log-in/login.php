@@ -25,7 +25,7 @@ if( $_SESSION ){
 			'nTotalAmountSpent' => $nTotalAmountSpent
 		);
 	
-		if($user["cEmail"] === $sEmail && $user["cEncriptedPassword"] === $sPassword){
+		if($user["cEmail"] === $sEmail && password_verify($sPassword, $user["cEncriptedPassword"])){
 			$_SESSION['jUser'] = $user;
 			$_SESSION['key'] = $user["nUserID"];
 			header('Location: ../../index.php');
@@ -55,43 +55,43 @@ if( $_SESSION ){
 			<form method="POST" class="log-in-form" >
 				<div class="group">
 					<label for="user" class="label">Email</label>
-					<input name="txtEmail" id="user" type="email" class="input" required>
+					<input name="txtEmail" id="user" type="email" required>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-					<input name="txtPassword" id="pass" type="password" class="input" data-type="password" required>
+					<input name="txtPassword" id="pass" type="password" data-type="password" required>
 				</div>
 				<!-- <div class="group">
 					<input name="checkAgent" id="check" type="checkbox" class="check" >
 					<label for="check"> I am an agent </label>
 				</div> -->
 				<div class="group">
-					<button type="submit" class="button"> Log In </button>
+					<button type="submit"> Log In </button>
 				</div>
 			</form>
-			<form id="agent-signup" action=../../apis/api-create-profile.php method="POST" class="sign-up-form" >
+			<form id="agent-signup" action=../../apis/api-sign-up.php method="POST" class="sign-up-form" >
 				<div class="group">
 					<label for="user" class="label">Name</label>
-					<input name="txtName" id="user" type="text" class="input" required>
+					<input name="cName" id="user" type="text" required>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Last Name</label>
-					<input name="txtLastName" id="user" type="text" class="input" required>
-				</div>
-				<div class="group">
-					<label for="pass" class="label">Password</label>
-					<input name="txtPassword" id="pass" type="password" class="input" data-type="password" required>
-				</div>
-				<div class="group">
-					<label for="pass" class="label">Repeat Password</label>
-					<input id="pass" type="password" class="input" data-type="password">
+					<input name="cSurname" id="user" type="text" required>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Email Address</label>
-					<input name="txtEmail" id="pass" type="email" class="input" required>
+					<input name="cEmail" id="pass" type="email" required>
 				</div>
 				<div class="group">
-					<button type="submit" class="button"> Sign Un </button>
+					<label for="pass" class="label">Password</label>
+					<input name="cEncriptedPassword" id="pass" type="password" data-type="password" required>
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Address</label>
+					<input name="cAddress" id="pass" type="text" required>
+				</div>
+				<div class="group">
+					<button type="submit"> Sign Un </button>
 				</div>
 			</form>
 		</div>
@@ -103,7 +103,6 @@ if( $_SESSION ){
         if($(this).attr("class")=="log-in-toggle"){
             $(".sign-up-form").hide();
             $(".log-in-form").show();
-
         }
         if($(this).attr("class")=="sign-up-toggle"){
 					$(".sign-up-form").show();

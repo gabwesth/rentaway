@@ -49,7 +49,7 @@ class User{
 			:cEncriptedPassword,
 			:cAddress,
 			:dSignUpDate,
-			:nTotalAmountSpent)";
+			0)";
 		$stmt = $this->conn->prepare($query);
 
 		$stmt->bindParam(':cName', $this->cName);
@@ -58,7 +58,6 @@ class User{
 		$stmt->bindParam(':cEncriptedPassword', $this->cEncriptedPassword);
 		$stmt->bindParam(':cAddress', $this->cAddress);
 		$stmt->bindParam(':dSignUpDate', $this->dSignUpDate);
-		$stmt->bindParam(':nTotalAmountSpent', $this->nTotalAmountSpent);
 
 		if($stmt->execute()){
 			return true;
