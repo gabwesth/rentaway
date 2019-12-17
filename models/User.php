@@ -7,6 +7,7 @@ class User{
 	public $nUserID;
 	public $cName;
 	public $cSurname;
+	public $cPhoneNumber;
 	public $cEmail;
 	public $cEncriptedPassword;
 	public $cAddress;
@@ -45,6 +46,7 @@ class User{
 		$query = "call sp_create_user(
 			:cName,
 			:cSurname,
+			:cPhoneNumber,
 			:cEmail,
 			:cEncriptedPassword,
 			:cAddress,
@@ -54,6 +56,7 @@ class User{
 
 		$stmt->bindParam(':cName', $this->cName);
 		$stmt->bindParam(':cSurname', $this->cSurname);
+		$stmt->bindParam(':cPhoneNumber', $this->cPhoneNumber);
 		$stmt->bindParam(':cEmail', $this->cEmail);
 		$stmt->bindParam(':cEncriptedPassword', $this->cEncriptedPassword);
 		$stmt->bindParam(':cAddress', $this->cAddress);
@@ -70,6 +73,7 @@ class User{
 		$query = "call sp_update_user(
 			:cName,
 			:cSurname,
+			:cPhoneNumber,
 			:cEmail,
 			:cEncriptedPassword,
 			:cAddress,
@@ -79,6 +83,7 @@ class User{
 
 		$stmt->bindParam(':cName', $this->cName);
 		$stmt->bindParam(':cSurname', $this->cSurname);
+		$stmt->bindParam(':cPhoneNumber', $this->cPhoneNumber);
 		$stmt->bindParam(':cEmail', $this->cEmail);
 		$stmt->bindParam(':cEncriptedPassword', $this->cEncriptedPassword);
 		$stmt->bindParam(':cAddress', $this->cAddress);

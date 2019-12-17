@@ -19,6 +19,7 @@
 	$user->nUserID = $data->nUserID; 
 	$user->cName = $data->cName; 
 	$user->cSurname = $data->cSurname;
+	$user->cPhoneNumber = $data->cPhoneNumber;
 	$user->cEmail = $data->cEmail;
 	$user->cEncriptedPassword = $data->cEncriptedPassword;
 	$user->cAddress = $data->cAddress;

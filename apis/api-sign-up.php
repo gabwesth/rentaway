@@ -17,6 +17,7 @@
 		
 			$user->cName = $_POST['cName']; 
 			$user->cSurname = $_POST['cSurname'];
+			$user->cPhoneNumber = $_POST['cPhoneNumber'];
 			$user->cEmail = $_POST['cEmail'];
 			$user->cEncriptedPassword = $encriptedPassword;
 			$user->cAddress = $_POST['cAddress'];

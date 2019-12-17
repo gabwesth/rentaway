@@ -11,6 +11,7 @@
   
         form_data.append("cName", $("#newUserName").val());
         form_data.append("cSurname", $("#newSurname").val());
+        form_data.append("cPhoneNumber", $("#newPhoneNumber").val());
         form_data.append("cEmail", $("#newEmail").val());
         form_data.append("cEncriptedPassword", $("#newEncriptedPassword").val());
         form_data.append("cAddress", $("#newUserAddress").val());
@@ -25,12 +26,14 @@
             processData: false,
           })
           .done(function(data){
+            console.log(data);
             var user = JSON.parse(data);
             $('#user-list').append(`
               <tr id=U >
                 <th>${user.nUserID}</th>
                 <td>${user.cName}</td>
                 <td>${user.cSurname}</td>
+                <td>${user.cPhoneNumber}</td>
                 <td>${user.cEmail}</td>
                 <td>${user.cEncriptedPassword}</td>
                 <td>${user.cAddress}</td>
@@ -70,10 +73,11 @@
     id = $(el).val();
     $("#newUserName").val($("#U-"+id).children()[1].innerText);
     $("#newSurname").val($("#U-"+id).children()[2].innerText);
-    $("#newEmail").val($("#U-"+id).children()[3].innerText);
-    $("#newEncriptedPassword").val($("#U-"+id).children()[4].innerText);
-    $("#newUserAddress").val($("#U-"+id).children()[5].innerText);
-    $("#newTotalAmountSpent").val($("#U-"+id).children()[7].innerText);
+    $("#newPhoneNumber").val($("#U-"+id).children()[3].innerText);
+    $("#newEmail").val($("#U-"+id).children()[4].innerText);
+    $("#newEncriptedPassword").val($("#U-"+id).children()[5].innerText);
+    $("#newUserAddress").val($("#U-"+id).children()[6].innerText);
+    $("#newTotalAmountSpent").val($("#U-"+id).children()[8].innerText);
     $("#confirmUserUpdate").val($("#U-"+id).children()[0].innerText);
 
   })
@@ -85,11 +89,14 @@
       id = $(el).val();
       form_data.append("cName", $("#newUserName").val());
       form_data.append("cSurname", $("#newSurname").val());
+      form_data.append("cPhoneNumber", $("#newPhoneNumber").val());
       form_data.append("cEmail", $("#newEmail").val());
       form_data.append("cEncriptedPassword", $("#newEncriptedPassword").val());
       form_data.append("cAddress", $("#newUserAddress").val());
       form_data.append("nTotalAmountSpent", $("#newTotalAmountSpent").val());
       form_data.append("nUserID", id);
+
+      console.log(JSON.stringify(Object.fromEntries(form_data)));
 
       $.ajax({
         url : "../../apis/user/update.php",
@@ -123,6 +130,7 @@
                 <th>${user.nUserID}</th>
                 <td>${user.cName}</td>
                 <td>${user.cSurname}</td>
+                <td>${user.cPhoneNumber}</td>
                 <td>${user.cEmail}</td>
                 <td>${user.cEncriptedPassword}</td>
                 <td>${user.cAddress}</td>

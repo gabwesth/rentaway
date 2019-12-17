@@ -21,6 +21,7 @@ Search <input type="text" name="name-filter" id="name-filter">
 				<th>nUserID</th>
 				<th>cName</th>
 				<th>cSurname</th>
+				<th>cPhoneNumber</th>
 				<th>cEmail</th>
 				<th>cEncriptedPassword</th>
 				<th>cAddress</th>
@@ -32,6 +33,7 @@ Search <input type="text" name="name-filter" id="name-filter">
 				<td><?=$row['nUserID']?></td>
 				<td><?=$row['cName']?></td>
 				<td><?=$row['cSurname']?></td>
+				<td><?=$row['cPhoneNumber']?></td>
 				<td><?=$row['cEmail']?></td>
 				<td><?=$row['cEncriptedPassword']?></td>
 				<td><?=$row['cAddress']?></td>
@@ -58,6 +60,10 @@ Search <input type="text" name="name-filter" id="name-filter">
 			<input id='newSurname' name="newSurname" type="text" class="input" required>
 		</div>
 		<div class="group">
+			<label class="label">Phone Number</label>
+			<input id='newPhoneNumber' name="newPhoneNumber" type="text" class="input" required>
+		</div>
+		<div class="group">
 			<label class="label">Email</label>
 			<input id='newEmail' name="newEmail" type="text" class="input" required>
 		</div>
@@ -68,6 +74,10 @@ Search <input type="text" name="name-filter" id="name-filter">
 		<div class="group">
 			<label class="label">Address</label>
 			<input id='newUserAddress' name='newUserAddress' type="text" class="input" required>
+		</div>
+		<div class="group">
+			<label class="label">Total Amount Spent</label>
+			<input id='newTotalAmountSpent' name='newTotalAmountSpent' type="text" class="input" required>
 		</div>
 		<div class="group">
 			<button id='createUser' type="submit" class="button"> Add User </button>

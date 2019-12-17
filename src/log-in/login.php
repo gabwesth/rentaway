@@ -79,6 +79,10 @@ if( $_SESSION ){
 					<input name="cSurname" id="user" type="text" required>
 				</div>
 				<div class="group">
+					<label for="pass" class="label">Phone Number</label>
+					<input name="cPhoneNumber" id="pass" type="text" required>
+				</div>
+				<div class="group">
 					<label for="pass" class="label">Email Address</label>
 					<input name="cEmail" id="pass" type="email" required>
 				</div>
